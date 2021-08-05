@@ -51,7 +51,7 @@ int main(){
 	std::vector<std::string> temporaryVector; //Can remove temporary vector if in function?
 	std::vector<std::vector<std::string>> fileContentVector;
 
-	//PART ONE --- FIND FILES ---	
+	//PART ONE --- FIND FILES --- TOOOODOOOOOO - Expand Big Time
 	system("find . -type f \\( -name \"*.jpeg\" -o -name \"*.txt\" \\) > fileLocations"); // Run script to find files and put them into a word document.									      
 	bool result = getFileContents("fileLocations", fileLocationsVector);					  // Read file locations into a string vector.
 
@@ -64,23 +64,43 @@ int main(){
 			temporaryVector.clear();
 		}
 
-		// ENCRYPT
+/*		// ENCRYPT
 		for(vector<std::string>& a: fileContentVector){
 			for(string& b : a){
 				basicEncryptContent(b);
 			}
-		}
-
-
-
-		//
+		}*/
 
 		// DECRYPT
 		for(vector<std::string>& a: fileContentVector){
 			for(string& b : a){
 				basicDecryptContent(b);
 			}
-		}    	
+		}    
+
+
+		ofstream myFile;
+		for(int i = 0; i < fileContentVector.size(); i++){  //loop through vector<vectors>(3)
+			myFile.open(fileLocationsVector[i]);
+			for(int j = 0; j < fileContentVector[i].size(); j++){ //loop through contents of files line by line.
+				myFile << fileContentVector[i][j] << '\n';
+				
+			}
+			myFile.close();
+			cout << "--------------" << endl;
+		}
+
+
+
+
+
+
+
+
+
+
+
+			
     	
     }
 
