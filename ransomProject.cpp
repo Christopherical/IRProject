@@ -51,25 +51,30 @@ int main(){
 	std::vector<std::string> temporaryVector; //Can remove temporary vector if in function?
 	std::vector<std::vector<std::string>> fileContentVector;
 
+	// -------------------
+
+	// Fuction to populate a vector with the locations that have already been encrypted. Use this to remove those from the fileLocationsVector.
+
+	// ------------------
+
 	//PART ONE --- FIND FILES --- TOOOODOOOOOO - Expand Big Time
 	system("find . -type f \\( -name \"*.jpeg\" -o -name \"*.txt\" \\) > fileLocations"); // Run script to find files and put them into a word document.									      
 	bool result = getFileContents("fileLocations", fileLocationsVector);					  // Read file locations into a string vector.
 
-	if(result){
-    	//PART TWO --- ENCRYPT ---    	
-		//TODO --- MOVE INTO FUNCTION --- adds contents of each location into a vector<string> to go into vector<vector<string>>
+	if(result){		
 		for(string& location : fileLocationsVector){
-			bool result2 = getFileContents(location, temporaryVector); // Read contents
-			fileContentVector.push_back(temporaryVector);
-			temporaryVector.clear();
+			if(getFileContents(location, temporaryVector)){
+				fileContentVector.push_back(temporaryVector);
+				temporaryVector.clear();		
+			}			
 		}
 
-/*		// ENCRYPT
+	/*	// ENCRYPT
 		for(vector<std::string>& a: fileContentVector){
 			for(string& b : a){
 				basicEncryptContent(b);
 			}
-		}*/
+		}
 
 		// DECRYPT
 		for(vector<std::string>& a: fileContentVector){
@@ -78,7 +83,7 @@ int main(){
 			}
 		}    
 
-
+		// UPDATE FILES
 		ofstream myFile;
 		for(int i = 0; i < fileContentVector.size(); i++){  //loop through vector<vectors>(3)
 			myFile.open(fileLocationsVector[i]);
@@ -86,21 +91,8 @@ int main(){
 				myFile << fileContentVector[i][j] << '\n';
 				
 			}
-			myFile.close();
-			cout << "--------------" << endl;
-		}
-
-
-
-
-
-
-
-
-
-
-
-			
+			myFile.close();			
+		}	*/		
     	
     }
 
