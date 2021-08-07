@@ -37,7 +37,7 @@ def get_locations():
 @app.route('/locations/<id>')
 def get_location(id):
 	location = Location.query.get_or_404(id)
-	if locations is None:
+	if location is None:
 		return {"error": "not found"}
 	return {"location": location.file_location}	
 
