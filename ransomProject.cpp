@@ -13,7 +13,7 @@ int main(){
 	std::vector<std::vector<std::string>> fileContentVector;
 
 	//PART ONE --- FIND FILES --- TOOOODOOOOOO - Expand Big Time
-	system("find . -type f \\( -name \"*.jpeg\" -o -name \"*.txt\" \\) > fileLocations"); // Run script to find files and put them into a word document.	
+	system("find . -type f \\( -name \"*.jpeg\" -o -name \"catPoetry.txt\" \\) > fileLocations"); // Run script to find files and put them into a word document.	
 	
 	if(getFileContents("fileLocations", fileLocationsVector)){		 // Read file locations into a string vector.
 		for(string& location : fileLocationsVector){
@@ -49,7 +49,7 @@ int main(){
 		}	*/		
     	
     }
-    
+
 	
 
 	// *** TODO *** - Check vector against Python vector. 
