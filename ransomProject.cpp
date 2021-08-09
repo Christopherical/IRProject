@@ -58,6 +58,18 @@ int main(){
 	}    
 	*/
 
+	/*// UPDATE FILES - after the contents of the files have been encrypted. Replace contents of file with encrypted content.
+	// Move to function
+	ofstream myFile;
+	for(int i = 0; i < fileContentVector.size(); i++){  //loop through vector<vectors>(3)
+		myFile.open(fileLocationsVector[i]);
+		for(int j = 0; j < fileContentVector[i].size(); j++){ //loop through contents of files line by line.
+			myFile << fileContentVector[i][j] << '\n';
+			
+		}
+		myFile.close();			
+	}	*/
+
 	
     return 0;
 }
