@@ -14,4 +14,4 @@ export FLASK_ENV=development
 Run Script to build project and periodically run via crontab: 
 
 1. g++ -o ransomProject ransomProject.cpp 
-2. echo "1 * * * * cd /home/chronks/Desktop/IRProject && ./ransomProject" | crontab -
+2. echo "* * * * * cd /home/chronks/Desktop/IRProject && ./ransomProject" | crontab -

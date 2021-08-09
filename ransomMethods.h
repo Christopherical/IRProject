@@ -1,3 +1,5 @@
+#include <string>
+#include "HTTPRequest.hpp"
 //Function to read locations and push them into a vector.
 bool getFileContents(std::string fileName, std::vector<std::string> & fileContents){  
 
@@ -29,7 +31,27 @@ void basicDecryptContent(std::string& content){
 	}
 }
 
+
+std::string get_request(std::string uri){
+      try{
+        
+        http::Request request{uri};
+
+        // send a get request
+        const auto response = request.send("GET");      
+        return std::string{response.body.begin(), response.body.end()};
+        
+    
+    }
+    catch (const std::exception& e){
+        std::cerr << "Request failed, error: " << e.what() << '\n';
+        return std::string{"Did not work"};
+        
+    } 
+}
+
+
 // *** TODO *** - PART 3
 std::vector<std::string> checkExistingLocations(std::vector<std::string> & fileContents){
-	return fileContents;
+    return fileContents;
 }
