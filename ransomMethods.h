@@ -14,18 +14,21 @@ bool getFileContents(std::string fileName, std::vector<std::string> & fileConten
     in.close();
     return true;
 }
+
 //Basic function to read all chars and increment them by one. 
 void basicEncryptContent(std::string& content){
 	for(char& chr : content){
 		chr = chr + 1;
 	}
 }
+
 //Basic function to read all chars and decrement them by one.
 void basicDecryptContent(std::string& content){
 	for(char& chr : content){
 		chr = chr - 1;
 	}
 }
+
 // *** TODO *** - PART 3
 std::vector<std::string> checkExistingLocations(std::vector<std::string> & fileContents){
 	return fileContents;
