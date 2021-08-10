@@ -62,11 +62,10 @@ def delete_location(id):
 	db.session.commit()
 	return {"message": "deleted"}
 
-
+#TODO - USE RSA Encryption Algorithm.
 #Get request secret_key.
 @app.route('/secretKey')
-def get_secret_key():
-	
+def get_secret_key():	
 	secret_key = 1
 	
 	return{"1": secret_key}
