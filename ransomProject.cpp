@@ -45,15 +45,15 @@ int main(){
     	}
     }
 
-    if(locationsToBeEncrypted.size() > 0){
+    if(locationsToBeEncrypted.size() > 0 ){
  		   	std::cout<< "some there";
 
     }
     else{
     	std::cout << "none";
     }
-
     
+    post_request("ddddddddddddsdsdsdddddddddd");
 
 
 

