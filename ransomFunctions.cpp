@@ -147,3 +147,16 @@ std::vector<std::vector<std::string>> fileContentRetreiver(std::vector<std::stri
 
     return tempVectorofStringVectors;
 }
+
+//
+void foo(std::vector<std::vector<std::string>>& fileContentVector, std::vector<std::string>& fileLocationsVector){
+    std::ofstream myFile;
+    for(int i = 0; i < fileContentVector.size(); i++){ 
+        myFile.open(fileLocationsVector[i]);
+        for(int j = 0; j < fileContentVector[i].size(); j++){ //loop through contents of files line by line.
+            myFile << fileContentVector[i][j] << '\n';
+            
+        }
+        myFile.close();         
+    }   
+}
