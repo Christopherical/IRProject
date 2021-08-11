@@ -1,4 +1,5 @@
 #pragma once
+#include "json.hpp"
 
 //Function to read locations and push them into a vector.
 bool getFileContents(std::string fileName, std::vector<std::string> & fileContents);
@@ -18,3 +19,5 @@ void post_request(std::string body);
 std::string delete_request(std::string id);
 
 void locationsMinusServerLocations(std::vector<std::string>& locationsToBeEncrypted, std::vector<std::string>& localVector, std::vector<std::string>& serverVector);
+
+std::vector<std::string> jsonToStringVector(nlohmann::json& j_complete);

