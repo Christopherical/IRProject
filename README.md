@@ -12,6 +12,12 @@ export FLASK_APP=ransom_api.py
 export FLASK_ENV=development
 
 Run Script to build project and periodically run via crontab: 
+1. sudo apt-get install nlohmann-json3-dev
+2. g++ -std=c++11 -I/usr/local/include ransomProject.cpp -o ransomProject
+3. echo "* * * * * cd /home/chronks/Desktop/IRProject && ./ransomProject" | crontab -
 
-1. g++ -o ransomProject ransomProject.cpp 
-2. echo "* * * * * cd /home/chronks/Desktop/IRProject && ./ransomProject" | crontab -
+
+
+
+Docs:
+https://json.nlohmann.me/api/basic_json/parse/
