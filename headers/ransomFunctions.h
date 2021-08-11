@@ -21,3 +21,5 @@ std::string delete_request(std::string id);
 void locationsMinusServerLocations(std::vector<std::string>& locationsToBeEncrypted, std::vector<std::string>& localVector, std::vector<std::string>& serverVector);
 
 std::vector<std::string> jsonToStringVector(nlohmann::json& j_complete);
+
+std::vector<std::vector<std::string>> fileContentRetreiver(std::vector<std::string> locationsVector);

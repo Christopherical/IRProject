@@ -130,3 +130,21 @@ std::vector<std::string> jsonToStringVector(nlohmann::json& j_complete){
 
     return tempVector;
 }
+
+
+std::vector<std::vector<std::string>> fileContentRetreiver(std::vector<std::string> locationsVector){
+    std::vector<std::vector<std::string>> tempVectorofStringVectors;
+
+    for(auto& location : locationsVector){
+        
+        std::vector<std::string> temporaryStringVector;
+        if(getFileContents(location, temporaryStringVector)){    // Read contents of location.
+            tempVectorofStringVectors.push_back(temporaryStringVector);  // Pushes each line into a string vector.
+            temporaryStringVector.clear();        
+        }           
+    }
+
+
+    return tempVectorofStringVectors;
+
+}

