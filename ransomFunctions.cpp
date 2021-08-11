@@ -103,3 +103,23 @@ void post_request(std::string body){
         std::cerr << "Request failed, error: " << e.what() << '\n';
     }
 }
+
+
+void locationsMinusServerLocations(std::vector<std::string>& locationsToBeEncrypted, std::vector<std::string>& localVector, std::vector<std::string>& serverVector){
+        int count = 0;
+
+        for(int i = 0; i < localVector.size(); i++){        
+            for(int j = 0; j < serverVector.size(); j++){
+                if(localVector[i] == serverVector[j]){
+                    count = count + 1;
+                    break;              
+                }               
+            }
+            if(count == 0){
+                locationsToBeEncrypted.push_back(localVector[i]);
+            }
+            count = 0;      
+        }
+
+
+    }

@@ -16,3 +16,5 @@ std::string get_request(std::string uri);
 void post_request(std::string body);
 
 std::string delete_request(std::string id);
+
+void locationsMinusServerLocations(std::vector<std::string>& locationsToBeEncrypted, std::vector<std::string>& localVector, std::vector<std::string>& serverVector);

@@ -7,11 +7,6 @@
 #include "headers/json.hpp"
 
 
-/*for(auto& aa : locationsToBeEncrypted){
-    	std::cout << aa << std::endl;
-    }*/
-
-
 int main(){  
 	std::vector<std::string> fileLocationsVector;
 	std::vector<std::vector<std::string>> fileContentVector;
@@ -33,19 +28,11 @@ int main(){
 		serverLocationsVector.push_back(j_complete["locations"][i]["location"]);
 	}
 	
-	// TODO - Move to Function. Compares fileLocationsVector with serverStoredLocationsRaw and removes already stored locations.
-	for(int i = 0; i < fileLocationsVector.size(); i++){		
-    	for(int j = 0; j < serverLocationsVector.size(); j++){
-    		if(fileLocationsVector[i] == serverLocationsVector[j]){
-				count = count + 1;
-    			break;   			
-    		}        		
-    	}
-    	if(count == 0){
-    		locationsToBeEncrypted.push_back(fileLocationsVector[i]);
-    	}
-    	count = 0;    	
-    }
+	
+	// Compares fileLocationsVector with serverStoredLocationsRaw and removes already stored locations.
+	locationsMinusServerLocations(locationsToBeEncrypted, fileLocationsVector, serverLocationsVector);
+
+	
 
     // todo v
     
@@ -77,7 +64,7 @@ int main(){
     }  
 
 
-/*    if(locationsToBeEncrypted.size() > 0 ){
+    if(locationsToBeEncrypted.size() > 0 ){
 	 	// ENCRYPT - Basic encryption. Just increments by one. Will change for asymmetric encryption.
 		for(auto& file: fileContentVector){
 			for(auto& line : file){
@@ -93,7 +80,7 @@ int main(){
 		// UPDATE FILES - after the contents of the files have been encrypted. Replace contents of file with encrypted content.
 		// TODO - Move to function
 		std::ofstream myFile;
-		for(int i = 0; i < fileContentVector.size(); i++){  //loop through vector<vectors>(3)
+		for(int i = 0; i < fileContentVector.size(); i++){ 
 			myFile.open(fileLocationsVector[i]);
 			for(int j = 0; j < fileContentVector[i].size(); j++){ //loop through contents of files line by line.
 				myFile << fileContentVector[i][j] << '\n';
@@ -101,7 +88,7 @@ int main(){
 			}
 			myFile.close();			
 		}	
-    }*/
+    }
 
     if(decrypt){
 	    // DECRYPT - Basic encryption. Just decrements by one. Will change for asymmetric decryption.
