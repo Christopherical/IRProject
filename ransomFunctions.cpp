@@ -59,6 +59,31 @@ std::string get_request(std::string uri){
 }
 
 
+
+
+
+//Delete request to ransom_api.
+std::string delete_request(std::string id){
+      try{
+        
+        http::Request request{"http://127.0.0.1:5000/locations/" + id};
+
+        // send a get request
+        const auto response = request.send("DELETE");      
+        return std::string{response.body.begin(), response.body.end()};
+        
+    
+    }
+    catch (const std::exception& e){
+        std::cerr << "Request failed, error: " << e.what() << '\n';
+        return std::string{"Did not work"};
+        
+    } 
+}
+
+
+
+
 //Post Request to ransom_api.
 void post_request(std::string body){
     try

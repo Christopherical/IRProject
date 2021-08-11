@@ -14,3 +14,5 @@ std::string get_request(std::string uri);
 
 //Post Request to ransom_api.
 void post_request(std::string body);
+
+std::string delete_request(std::string id);
