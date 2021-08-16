@@ -25,17 +25,17 @@ bool getFileContents(std::string fileName, std::vector<std::string> & fileConten
 
 
 // Basic function to read all chars and increment them by one. 
-void basicEncryptContent(std::string& content){
+void basicEncryptContent(std::string& content, int secretKey){
 	for(char& chr : content){
-		chr = chr + 1;
+		chr = chr + secretKey;
 	}
 }
 
 
 // Basic function to read all chars and decrement them by one.
-void basicDecryptContent(std::string& content){
+void basicDecryptContent(std::string& content, int secretKey){
 	for(char& chr : content){
-		chr = chr - 1;
+		chr = chr - secretKey;
 	}
 }
 
