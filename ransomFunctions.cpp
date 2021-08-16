@@ -149,7 +149,7 @@ std::vector<std::vector<std::string>> fileContentRetreiver(std::vector<std::stri
 }
 
 //
-void foo(std::vector<std::vector<std::string>>& fileContentVector, std::vector<std::string>& fileLocationsVector){
+void encryptOrDecryptFile(std::vector<std::vector<std::string>>& fileContentVector, std::vector<std::string>& fileLocationsVector){
     std::ofstream myFile;
     for(int i = 0; i < fileContentVector.size(); i++){ 
         myFile.open(fileLocationsVector[i]);

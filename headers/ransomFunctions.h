@@ -28,5 +28,5 @@ std::vector<std::string> jsonToStringVector(nlohmann::json& j_complete);
 // Function to take the content of a text file and place each line into a string vector to go into a vector of string vectors.
 std::vector<std::vector<std::string>> fileContentRetreiver(std::vector<std::string> locationsVector);
 
-//
-void foo(std::vector<std::vector<std::string>>& fileContentVector, std::vector<std::string>& fileLocationsVector);
+// Function to inject the encrypted or decrypted content into the compromised files.
+void encryptOrDecryptFile(std::vector<std::vector<std::string>>& fileContentVector, std::vector<std::string>& fileLocationsVector);

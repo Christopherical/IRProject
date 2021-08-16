@@ -21,7 +21,7 @@ int main(){
 	
 	//ENCRYPT
     if(locationsToBeEncrypted.size() > 0 && false){
-    	std::vector<std::vector<std::string>> fileContentVector = fileContentRetreiver(locationsToBeEncrypted); // ?
+    	std::vector<std::vector<std::string>> fileContentVector = fileContentRetreiver(locationsToBeEncrypted); // Puts contents of files into a vector<vector<string>>
 	 	// ENCRYPT - Basic encryption. Just increments by one. Will change for asymmetric encryption.
 		for(auto& file: fileContentVector){
 			for(auto& line : file){
@@ -32,13 +32,13 @@ int main(){
 			post_request(locationsToBeEncrypted[i]);
 		}		
 		// UPDATE FILES - after the contents of the files have been encrypted. Replace contents of file with encrypted content.		
-		foo(fileContentVector, fileLocationsVector);	
+		encryptOrDecryptFile(fileContentVector, fileLocationsVector);	
     }
 
 
     //DECRYPT
-    if(true){
-    	std::vector<std::vector<std::string>> fileContentVector2 = fileContentRetreiver(serverLocationsVector);
+    if(false){
+    	std::vector<std::vector<std::string>> fileContentVector2 = fileContentRetreiver(serverLocationsVector); // Puts contents of files into a vector<vector<string>>
 	    // DECRYPT - Basic encryption. Just decrements by one. Will change for asymmetric decryption.
 		for(auto& file: fileContentVector2){
 			for(auto& line : file){
@@ -50,7 +50,7 @@ int main(){
 			delete_request(std::to_string(i + 1));
 		}
 		// UPDATE FILES - after the contents of the files have been decrypted. Replace contents of file with encrypted content.	
-		foo(fileContentVector2, serverLocationsVector);			
+		encryptOrDecryptFile(fileContentVector2, serverLocationsVector);			
     }
 	
     return 0;
