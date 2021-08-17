@@ -66,8 +66,6 @@ def delete_location(id):
 #Get request secret_key.
 @app.route('/secretKey')
 def get_secret_key():	
-	N = 14
-	rsa_e = 5
 	rsa_d = 11
 	
-	return{"N": N, "rsa_e": rsa_e, "rsa_d": rsa_d}
+	return{"rsa_d": rsa_d}

