@@ -12,11 +12,10 @@ export FLASK_APP=ransom_api.py
 export FLASK_ENV=development
 flask run
 
-Run Script to build project and periodically run via crontab: 
-1. sudo apt-get install nlohmann-json3-dev
-2. g++ -std=c++11 ransomProject.cpp ransomFunctions.cpp -o ransomProject
-3. echo "* * * * * cd /home/chronks/Desktop/IRProject && ./ransomProject" | crontab -
+Run start script ./ransomStart.sh to run the program once and add a periodic job to the crontab every minute which encrypts any new files.
 
-Docs:
+Run stop scrupt ./ransomStop/.sh to run a program which decrypts the already encrypted files and removes the crontab job.
+
+Library Repo/Docs:
 https://json.nlohmann.me/api/basic_json/parse/
-Testdd
+https://github.com/elnormous/HTTPRequest
